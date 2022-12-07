@@ -1,84 +1,50 @@
-# @grace-studio/next-strapi
+# @grace-studio/next-wordpress
 
-[![npm version](https://badge.fury.io/js/@grace-studio%2Fnext-strapi.svg)](https://badge.fury.io/js/@grace-studio%2Fnext-strapi)
+[![npm version](https://badge.fury.io/js/@grace-studio%2Fnext-wordpress.svg)](https://badge.fury.io/js/@grace-studio%2Fnext-wordpress)
 
-Middle layer to connect a Next.js application with Strapi.
+Middle layer to connect a Next.js application with WordPress Rest API.
 
 ## Installation
 
 ```bash
-npm i @grace-studio/next-strapi
+npm i @grace-studio/next-wordpress
 ```
 
 or
 
 ```bash
-yarn add @grace-studio/next-strapi
+yarn add @grace-studio/next-wordpress
 ```
 
 ## Usage example
 
 ```ts
 import {
-  NextStrapiConfig,
-  NextStrapi,
-  CollectionItem,
-} from '@grace-studio/next-strapi';
+  NextWordPress,
+  NextWordPressConfig,
+} from '@grace-studio/next-wordpress';
 
-const config: NextStrapiConfig = {
-  apiToken: process.env.STRAPI_API_TOKEN!,
-  apiUrl: process.env.NEXT_PUBLIC_STRAPI_API_URL!,
+const config: NextWordPressConfig = {
+  apiUrl: process.env.NEXT_PUBLIC_WORDPRESS_API_URL!,
 };
 
-// Create instance of NextStrapi
-const api = NextStrapi.create(config);
+// Create instance of NextWordPress
+export const api = NextWordPress.create(config);
 
-// Get single item with id = global
-const [global] = await api.get.item({
-  apiId: 'global',
-  locale: 'en',
-  populateQueryObject: {
-    populate: '*',
-  },
-});
-
-// Get collection with id = pages
-const pages = await api.get.collection({
-  apiId: 'pages',
-  locale: 'en',
-  populateQueryObject: {
-    populate: '*',
-  },
-});
-
-// Get collections paths with id = pages
-const pages = await api.fetch.collectionPaths({ apiId: 'pages' });
-
-const paths = pages.map((page: CollectionItem) => {
-  const { slug } = page;
-
-  return {
-    params: { slug },
-  };
-});
-
-// The expected output type from the api can be provided to the methods
-type GlobalItem = {
+// Get posts from custom post type 'partner'
+// And specify which fields to be populated by the API.
+// Omitting the params prop will return all fields in the post.
+type Partner = {
   id: number;
-  title: string;
-  slug: string;
+  link: string;
+  acf: Record<string, any>;
 };
 
-const [global] = await api.get.item<GlobalItem>({
-  apiId: 'global',
-  locale: 'en',
-  populateQueryObject: {
-    populate: '*',
+// All arrays in the returned data has a generated '_key' field that can be used for the 'key' value in React loops in rendering.
+const partners = await api.get.item<Partner>({
+  path: 'partner',
+  params: {
+    _fields: 'id,link,acf',
   },
-});
-
-// Get menu with slug = main-menu
-const menu = await api.get.menus({
-  slug: 'main-menu',
 });
 ```

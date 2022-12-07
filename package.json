@@ -1,7 +1,7 @@
 {
   "name": "@grace-studio/next-wordpress",
   "version": "0.0.1",
-  "description": "Middle layer to connect a Next.js application with Wordpress Rest API.",
+  "description": "Middle layer to connect a Next.js application with WordPress Rest API.",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/grace-studio/next-wordpress#readme",
   "peerDependencies": {
-    "next": "^13.0.0"
+    "next": "13"
   },
   "devDependencies": {
     "@types/jest": "29.1.1",
