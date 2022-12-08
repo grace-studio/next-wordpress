@@ -33,7 +33,6 @@ export const api = NextWordPress.create(config);
 
 // Get posts from custom post type 'partner'
 // And specify which fields to be populated by the API.
-// Omitting the params prop will return all fields in the post.
 type Partner = {
   id: number;
   link: string;
@@ -48,3 +47,5 @@ const partners = await api.get.item<Partner>({
   },
 });
 ```
+
+More information about what params can be used and how can be found in the [WordPress Rest API documentation](https://developer.wordpress.org/rest-api/using-the-rest-api/).
