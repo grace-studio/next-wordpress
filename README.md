@@ -3,6 +3,7 @@
 [![npm version](https://badge.fury.io/js/@grace-studio%2Fnext-wordpress.svg)](https://badge.fury.io/js/@grace-studio%2Fnext-wordpress)
 
 Middle layer to connect a Next.js application with WordPress Rest API.
+
 *Note: Requires Next.js 13 or later. Uses next-gen Fetch API in both browser and in Node.js.*
 
 ## Installation
