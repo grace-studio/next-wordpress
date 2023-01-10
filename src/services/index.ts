@@ -1,6 +1,6 @@
 import { ApiFactory } from '../factories/apiFactory';
 import { DataFactory } from '../factories/dataFactory';
-import { FetchOptions, NextWordPressConfig } from '../types';
+import { FetchOptions, NextArray, NextWordPressConfig } from '../types';
 import { HttpClient } from '../data';
 import { validateConfig } from '../utils';
 
@@ -27,7 +27,8 @@ export class NextWordPress {
 
     const json = await response.json();
 
-    const dataWithKeys: T[] = DataFactory.recursiveAddKeysToArray(json);
+    const dataWithKeys: NextArray<T> =
+      DataFactory.recursiveAddKeysToArray(json);
 
     return dataWithKeys;
   }

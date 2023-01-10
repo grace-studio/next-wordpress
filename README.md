@@ -41,7 +41,7 @@ type Partner = {
   acf: Record<string, any>;
 };
 
-// All arrays in the returned data has a generated '_key' field that can be used for the 'key' value in React loops in rendering.
+// All arrays in the returned data has a generated '_key' field that can be used for the 'key' prop in React loops in rendering.
 const partners = await api.get.item<Partner>({
   path: 'partner',
   params: {
