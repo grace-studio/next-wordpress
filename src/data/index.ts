@@ -17,7 +17,6 @@ export class HttpClient {
 
   async get(path: string) {
     const url = ApiFactory.createUrl(this.__config.apiUrl, path);
-    console.log(url);
 
     const response = await fetch(url);
 
