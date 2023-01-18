@@ -1,13 +1,11 @@
 import { NextWordPressConfig } from '../types';
-import { randomUUID } from 'crypto';
 
 export const throwError = (message: string, ...otherMessages: string[]) => {
   console.error(...otherMessages);
   throw new Error(`NextWordPress: ${message}`);
 };
 
-export const generateUUID = () =>
-  randomUUID({ disableEntropyCache: true }).replace(/[\W_]+/g, '');
+export const generateUUID = () => crypto.randomUUID().replace(/[\W_]+/g, '');
 
 export const validateConfig = (config: NextWordPressConfig) => {
   if (!config) {
