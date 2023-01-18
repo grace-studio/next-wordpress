@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { NextWordPressConfig } from '../types';
 
 export const throwError = (message: string, ...otherMessages: string[]) => {
