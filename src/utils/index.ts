@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import cryptoModule from 'crypto';
 import { NextWordPressConfig } from '../types';
 
 export const throwError = (message: string, ...otherMessages: string[]) => {
@@ -6,7 +6,18 @@ export const throwError = (message: string, ...otherMessages: string[]) => {
   throw new Error(`NextWordPress: ${message}`);
 };
 
-export const generateUUID = () => crypto.randomUUID().replace(/[\W_]+/g, '');
+const isBrowser = typeof window !== 'undefined';
+
+export const generateUUID = () => {
+  let rawString: string;
+  if (isBrowser) {
+    rawString = crypto.randomUUID();
+  } else {
+    rawString = cryptoModule.randomUUID();
+  }
+
+  return rawString.replace(/[\W_]+/g, '');
+};
 
 export const validateConfig = (config: NextWordPressConfig) => {
   if (!config) {
