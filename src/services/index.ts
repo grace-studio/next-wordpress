@@ -45,9 +45,9 @@ export class NextWordPress {
     };
 
     const singleItem = <T>(options: FetchOptionsSingle) => {
-      const { path, params } = options;
+      const { path, params, id } = options;
 
-      return this.__fetchFromApi<T>(path, params);
+      return this.__fetchFromApi<T>(`${path}/${id}`, params);
     };
 
     return {
