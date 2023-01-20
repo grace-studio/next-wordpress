@@ -1,8 +1,13 @@
 import { ApiFactory } from '../factories/apiFactory';
 import { DataFactory } from '../factories/dataFactory';
-import { FetchOptions, NextArray, NextWordPressConfig } from '../types';
 import { HttpClient } from '../data';
 import { validateConfig } from '../utils';
+import type {
+  FetchOptions,
+  FetchOptionsSingle,
+  NextArray,
+  NextWordPressConfig,
+} from '../types';
 
 export class NextWordPress {
   private __httpClient: HttpClient;
@@ -27,16 +32,19 @@ export class NextWordPress {
 
     const json = await response.json();
 
-    const dataWithKeys: NextArray<T> =
-      DataFactory.recursiveAddKeysToArray(json);
+    const dataWithKeys: T = DataFactory.recursiveAddKeysToArray(json);
 
     return dataWithKeys;
   }
 
   get get() {
-    const __this = this;
-
     const item = <T>(options: FetchOptions) => {
+      const { path, params } = options;
+
+      return this.__fetchFromApi<NextArray<T>>(path, params);
+    };
+
+    const singleItem = <T>(options: FetchOptionsSingle) => {
       const { path, params } = options;
 
       return this.__fetchFromApi<T>(path, params);
@@ -44,6 +52,7 @@ export class NextWordPress {
 
     return {
       item,
+      singleItem,
     };
   }
 }

@@ -8,3 +8,7 @@ export type FetchOptions = {
   path: string;
   params?: Record<string, string>;
 };
+
+export type FetchOptionsSingle = FetchOptions & {
+  id: number;
+};
