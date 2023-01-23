@@ -17,8 +17,13 @@ export class HttpClient {
 
   async get(path: string) {
     const url = ApiFactory.createUrl(this.__config.apiUrl, path);
+    const options = {
+      headers: {
+        ...ApiFactory.createAuthHeaders(this.__config.auth),
+      },
+    };
 
-    const response = await fetch(url);
+    const response = await fetch(url, options);
 
     const { status } = response;
 
