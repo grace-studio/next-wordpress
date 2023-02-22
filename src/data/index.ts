@@ -20,6 +20,7 @@ export class HttpClient {
     const options = {
       headers: {
         ...ApiFactory.createAuthHeaders(this.__config.auth),
+        ...this.__config.headers,
       },
     };
 

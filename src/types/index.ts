@@ -16,6 +16,7 @@ export type Auth = BasicAuth | ApiKeyAuth;
 export type NextWordPressConfig = {
   apiUrl: string;
   auth?: Auth;
+  headers?: Record<string, string>;
 };
 
 export type FetchOptions = {
