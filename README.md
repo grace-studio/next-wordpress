@@ -75,6 +75,7 @@ const partner = await api.get.singleItem<Partner>({
   params: {
     _fields: 'id,link,acf',
   },
+  verbose: true, // add verbose logging
 });
 ```
 
