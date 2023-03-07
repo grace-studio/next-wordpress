@@ -28,3 +28,9 @@ export const validateConfig = (config: NextWordPressConfig) => {
     throwError('No apiUrl provided in config');
   }
 };
+
+export const logger = (message: object, verbose?: boolean) =>
+  verbose &&
+  console.log(
+    JSON.stringify({ message, timestamp: new Date().toISOString() }, null, 2)
+  );

@@ -1,7 +1,7 @@
 import { ApiFactory } from '../factories/apiFactory';
 import { DataFactory } from '../factories/dataFactory';
 import { HttpClient } from '../data';
-import { validateConfig } from '../utils';
+import { logger, validateConfig } from '../utils';
 import type {
   FetchOptions,
   FetchOptionsSingle,
@@ -24,9 +24,12 @@ export class NextWordPress {
 
   private async __fetchFromApi<T>(
     path: string,
-    params?: Record<string, string>
+    params?: Record<string, string>,
+    verbose?: boolean
   ) {
     const fullPath = ApiFactory.createPath(path, params);
+
+    logger({ fetchUrl: fullPath }, verbose);
 
     const response = await this.__httpClient.get(fullPath);
 
@@ -39,15 +42,15 @@ export class NextWordPress {
 
   get get() {
     const item = <T>(options: FetchOptions) => {
-      const { path, params } = options;
+      const { path, params, verbose } = options;
 
-      return this.__fetchFromApi<NextArray<T>>(path, params);
+      return this.__fetchFromApi<NextArray<T>>(path, params, verbose);
     };
 
     const singleItem = <T>(options: FetchOptionsSingle) => {
-      const { path, params, id } = options;
+      const { path, params, id, verbose } = options;
 
-      return this.__fetchFromApi<T>(`${path}/${id}`, params);
+      return this.__fetchFromApi<T>(`${path}/${id}`, params, verbose);
     };
 
     return {

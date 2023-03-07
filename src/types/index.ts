@@ -22,6 +22,7 @@ export type NextWordPressConfig = {
 export type FetchOptions = {
   path: string;
   params?: Record<string, string>;
+  verbose?: boolean;
 };
 
 export type FetchOptionsSingle = FetchOptions & {
