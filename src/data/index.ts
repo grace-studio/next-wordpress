@@ -29,7 +29,10 @@ export class HttpClient {
     const response = await fetch(url, options);
 
     const responseTime = Date.now() - startTime;
-    logger({ fetchUrl: url, responseTime }, this.__config.verbose);
+    logger(
+      { fetchUrl: url, responseTime: `${responseTime} ms` },
+      this.__config.verbose
+    );
 
     const { status } = response;
 
