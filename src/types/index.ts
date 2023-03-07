@@ -17,12 +17,12 @@ export type NextWordPressConfig = {
   apiUrl: string;
   auth?: Auth;
   headers?: Record<string, string>;
+  verbose?: boolean;
 };
 
 export type FetchOptions = {
   path: string;
   params?: Record<string, string>;
-  verbose?: boolean;
 };
 
 export type FetchOptionsSingle = FetchOptions & {

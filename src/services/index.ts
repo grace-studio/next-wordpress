@@ -11,8 +11,10 @@ import type {
 
 export class NextWordPress {
   private __httpClient: HttpClient;
+  private __config: NextWordPressConfig;
 
   private constructor(config: NextWordPressConfig) {
+    this.__config = config;
     this.__httpClient = HttpClient.create(config);
   }
 
@@ -24,12 +26,11 @@ export class NextWordPress {
 
   private async __fetchFromApi<T>(
     path: string,
-    params?: Record<string, string>,
-    verbose?: boolean
+    params?: Record<string, string>
   ) {
     const fullPath = ApiFactory.createPath(path, params);
 
-    logger({ fetchUrl: fullPath }, verbose);
+    logger({ fetchUrl: fullPath }, this.__config.verbose);
 
     const response = await this.__httpClient.get(fullPath);
 
@@ -42,15 +43,15 @@ export class NextWordPress {
 
   get get() {
     const item = <T>(options: FetchOptions) => {
-      const { path, params, verbose } = options;
+      const { path, params } = options;
 
-      return this.__fetchFromApi<NextArray<T>>(path, params, verbose);
+      return this.__fetchFromApi<NextArray<T>>(path, params);
     };
 
     const singleItem = <T>(options: FetchOptionsSingle) => {
-      const { path, params, id, verbose } = options;
+      const { path, params, id } = options;
 
-      return this.__fetchFromApi<T>(`${path}/${id}`, params, verbose);
+      return this.__fetchFromApi<T>(`${path}/${id}`, params);
     };
 
     return {

@@ -47,6 +47,9 @@ const config: NextWordPressConfig = {
   headers: {
     someKey: 'somevalue',
   },
+
+  // add verbose logging
+  verbose: true,
 };
 
 // Create instance of NextWordPress
@@ -75,7 +78,6 @@ const partner = await api.get.singleItem<Partner>({
   params: {
     _fields: 'id,link,acf',
   },
-  verbose: true, // add verbose logging
 });
 ```
 
