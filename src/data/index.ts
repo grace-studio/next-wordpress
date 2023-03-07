@@ -1,6 +1,6 @@
 import { ApiFactory } from '../factories/apiFactory';
+import { logger, validateConfig } from '../utils';
 import { NextWordPressConfig } from '../types';
-import { validateConfig } from '../utils';
 
 export class HttpClient {
   private __config: NextWordPressConfig;
@@ -24,7 +24,12 @@ export class HttpClient {
       },
     };
 
+    const startTime = Date.now();
+
     const response = await fetch(url, options);
+
+    const responseTime = Date.now() - startTime;
+    logger({ fetchUrl: url, responseTime }, this.__config.verbose);
 
     const { status } = response;
 

@@ -32,5 +32,5 @@ export const validateConfig = (config: NextWordPressConfig) => {
 export const logger = (message: object, verbose?: boolean) =>
   verbose &&
   console.log(
-    JSON.stringify({ message, timestamp: new Date().toISOString() }, null, 2)
+    JSON.stringify({ timestamp: new Date().toISOString(), message }, null, 2)
   );

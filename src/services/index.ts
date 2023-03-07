@@ -1,7 +1,7 @@
 import { ApiFactory } from '../factories/apiFactory';
 import { DataFactory } from '../factories/dataFactory';
 import { HttpClient } from '../data';
-import { logger, validateConfig } from '../utils';
+import { validateConfig } from '../utils';
 import type {
   FetchOptions,
   FetchOptionsSingle,
@@ -11,10 +11,8 @@ import type {
 
 export class NextWordPress {
   private __httpClient: HttpClient;
-  private __config: NextWordPressConfig;
 
   private constructor(config: NextWordPressConfig) {
-    this.__config = config;
     this.__httpClient = HttpClient.create(config);
   }
 
@@ -29,8 +27,6 @@ export class NextWordPress {
     params?: Record<string, string>
   ) {
     const fullPath = ApiFactory.createPath(path, params);
-
-    logger({ fetchUrl: fullPath }, this.__config.verbose);
 
     const response = await this.__httpClient.get(fullPath);
 
