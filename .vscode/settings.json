@@ -1,6 +1,5 @@
 {
   "editor.tabSize": 2,
-  "eslint.alwaysShowStatus": true,
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
   "editor.codeActionsOnSave": {
@@ -16,6 +15,5 @@
     "**/.DS_Store": true,
     "**/Thumbs.db": true
   },
-  "typescript.extension.sortImports.sortOnSave": true,
-  "hide-files.files": []
+  "typescript.extension.sortImports.sortOnSave": true
 }

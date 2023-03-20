@@ -8,8 +8,14 @@ const stringifyParams = (params: Record<string, string>) =>
 
 const convertToBase64 = (str: string) => Buffer.from(str).toString('base64');
 
-const createPath = (path: string, params?: Record<string, string>) =>
-  [path, params && stringifyParams(params)].join('');
+const createPath = (path: string, params?: Record<string, string>) => {
+  const joinedPaths = {
+    per_page: '100',
+    ...params,
+  };
+
+  return [path, stringifyParams(joinedPaths)].join('');
+};
 
 const createUrl = (baseUrl: string, path: string) =>
   [
